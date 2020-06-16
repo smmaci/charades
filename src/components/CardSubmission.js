@@ -11,6 +11,8 @@ export default class CardSubmission extends React.Component {
     console.log(e.target.newCard.value)
     const newCardValue = e.target.newCard.value
     if (newCardValue) {
+
+        //TODO: Don't hit this, hit ${host}${basePath}/api/card
       fetch('http://localhost:3000/api/card', { method: 'POST', body: JSON.stringify({newCard: newCardValue}) }).then(res => res.json())
       .then(
           (result) => {

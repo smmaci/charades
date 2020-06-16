@@ -11,6 +11,7 @@ export default class Card extends React.Component {
     }
 
     newCard() {
+        //TODO: Don't hit this, hit ${host}${basePath}/api/card
         fetch("http://localhost:3000/api/card")
             .then(res => res.json())
             .then(
