@@ -12,7 +12,7 @@ export default class Card extends React.Component {
     }
 
     newCard() {
-        fetch(`http://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`)
+        fetch(`https://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`)
             .then(res => res.json())
             .then(
                 (result) => {

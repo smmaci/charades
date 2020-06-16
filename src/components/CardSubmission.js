@@ -13,7 +13,7 @@ export default class CardSubmission extends React.Component {
     if (newCardValue) {
       //TODO: Don't hit this, hit ${host}${basePath}/api/card
       // console.log(`Trying to hit `, `http://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`)
-      fetch(`http://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`, { method: 'POST', body: JSON.stringify({newCard: newCardValue}) }).then(res => res.json())
+      fetch(`https://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`, { method: 'POST', body: JSON.stringify({newCard: newCardValue}) }).then(res => res.json())
       .then(
           (result) => {
               console.log(result)
