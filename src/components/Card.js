@@ -5,20 +5,22 @@ export default class Card extends React.Component {
         super(props)
         this.state = {
             isLoaded: false,
-            card: undefined
+            card: undefined,
+            remainingCards: undefined
         }
         this.newCard = this.newCard.bind(this)
     }
 
     newCard() {
-        //TODO: Don't hit this, hit ${host}${basePath}/api/card
-        fetch("http://localhost:3000/api/card")
+        fetch(`http://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`)
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        card: result.card
+                        card: result.card,
+                        remainingCards: result.remainingCards,
+                        error: false
                     })
                 },
                 (error) => {
@@ -32,7 +34,7 @@ export default class Card extends React.Component {
 
 
     render() {
-        const { error, isLoaded, card } = this.state
+        const { error, isLoaded, card, remainingCards } = this.state
         const cardBody = () => {
             if (error) {
                 return <div>Error: {error.message}</div>
@@ -49,6 +51,9 @@ export default class Card extends React.Component {
                 <div className="w-full flex flex-col items-center border border-gray-400 shadow rounded p-8 my-8 max-w-lg">
                     {cardBody()}
                 </div>
+                <aside className="text-lg font-thin" >
+                    {remainingCards} card(s) left
+                </aside>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-12" onClick={this.newCard}>New Card</button>
             </React.Fragment>
         )

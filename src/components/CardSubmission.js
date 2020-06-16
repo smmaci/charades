@@ -8,12 +8,12 @@ export default class CardSubmission extends React.Component {
 
   submitCard(e) {
     e.preventDefault()
-    console.log(e.target.newCard.value)
     const newCardValue = e.target.newCard.value
+    e.target.newCard.value = ''
     if (newCardValue) {
-
-        //TODO: Don't hit this, hit ${host}${basePath}/api/card
-      fetch('http://localhost:3000/api/card', { method: 'POST', body: JSON.stringify({newCard: newCardValue}) }).then(res => res.json())
+      //TODO: Don't hit this, hit ${host}${basePath}/api/card
+      // console.log(`Trying to hit `, `http://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`)
+      fetch(`http://${process.env.NEXT_PUBLIC_HOST}${process.env.basePath || ''}/api/card`, { method: 'POST', body: JSON.stringify({newCard: newCardValue}) }).then(res => res.json())
       .then(
           (result) => {
               console.log(result)
@@ -22,6 +22,7 @@ export default class CardSubmission extends React.Component {
               console.error(error)
           }
       )
+      .then(() => {})
     }
   }
 
